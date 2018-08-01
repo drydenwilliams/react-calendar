@@ -1,0 +1,10 @@
+/**
+ * Base
+ *
+ */
+body {
+    font-family: sans-serif;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}

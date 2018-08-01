@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import Calendar from './components/Calendar';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -22,7 +23,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>Hello world</div>
+    <Calendar />
   </Provider>,
   document.getElementById('root')
 )

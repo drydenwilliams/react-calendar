@@ -8,3 +8,110 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/**
+ * components/CalendarNav
+ *
+ */
+.calendar__nav {
+    display: flex;
+
+    padding: 2rem 1rem;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar__nav h2 {
+    font-size: 1.6rem;
+    font-weight: 100;
+    width: 50%;
+    text-align: center;
+}
+.calendar__nav button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+    border: 0;
+    outline: 0;
+}
+
+/**
+ * components/CalendarHeader
+ *
+ */
+.calendar__header {
+  display: flex;
+}
+
+.calendar__header div {
+  flex: 1;
+}
+
+/**
+ * Week
+ *
+ */
+.week {
+    display: flex;
+}
+
+/**
+ * Days of the week
+ *
+ */
+.week__day {
+    position: relative;
+
+    padding: 1rem;
+
+    text-align: center;
+
+    flex: 1;
+}
+
+.week__day {
+  border-radius: 0;
+}
+
+.week__day--today {
+  color: white;
+  background-color: #3e3e3e;
+}
+
+.week__day--weekend {
+  color: #3e3e3e;
+  background-color: #f3f3f3;
+}
+
+.week__day--past {
+  cursor: not-allowed;
+
+  color: #cfcfcf;
+  background-color: #f7f8fb;
+}
+
+.week__day--selected {
+  cursor: pointer;
+}
+
+/**
+ * Reminders
+ *
+ */
+.reminder__label {
+    width: 100%;
+    padding: 3px;
+
+    background-color: #efefef;
+}
+
+.reminder__label.reminder__label--work {
+    background-color: lightcoral;
+}
+
+.reminder__label.reminder__label--calendar {
+    background-color: lightgreen;
+}

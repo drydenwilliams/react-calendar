@@ -8,8 +8,9 @@ import guid from '../utils/uuid'
  *
  */
 const createCalendarMonth = (startWeek, endWeek) => {
-  const calendarArray = []
+  const monthArray = []
   // TODO: Fix this as it doesnt work for december
+  // For August this would start on weekIndex = 31 and go to the endWeek = 35 (4)
   for (
     let weekIndex = startWeek, weekArrayIndex = 0;
     weekIndex < endWeek + 1;
@@ -17,31 +18,36 @@ const createCalendarMonth = (startWeek, endWeek) => {
   ) {
     const weekUuid = guid()
 
-    calendarArray.push({
+    // Push a week object into the monthArray
+    monthArray.push({
       uuid: weekUuid,
       weekIndex,
       index: weekArrayIndex,
       days:
         Array(7)
-        .fill({ id: 0 })
-        .map((item, index) => ({
-          uuid: guid(),
-          parentWeekUuid: weekUuid,
-          date: moment()
-            .week(weekIndex)
-            .startOf('week')
-            .clone()
-            .add(item.id + index, 'day'),
-          weekIndex,
-          index: item.id + index,
-          reminders: []
-        }))
+        .fill({ id: 0 }) // Fill the array with 7 blank days
+        .map((item, index) => {
+          return {
+            uuid: guid(),
+            parentWeekUuid: weekUuid, // Keep a track of the partent
+            date: moment() // Get todays date
+              .week(weekIndex) // Get or sets the week of the year
+              .startOf('week') // set to the first day of this week, 12:00 am
+              .clone() // Create a clone of a duration. Durations are mutable - This will clone Sunday date
+              .add(index, 'day'), // Add certain amount/index days to the start of the week which will be a sunday
+            weekIndex,
+            index: index,
+            reminders: [] // Create blank reminders within the day
+          }
+        })
     })
   }
-  return calendarArray
+  return monthArray
 }
 
+// Gets the current month start week index based on 52 weeks in a year
 const initialStartWeek = moment().startOf('month').add(0, 'month').week()
+// Gets the current month end week index based on 52 weeks in a year
 const initialEndWeek = moment().endOf('month').add(0, 'month').week()
 const currentMonth = createCalendarMonth(initialStartWeek, initialEndWeek)
 
@@ -49,7 +55,7 @@ const currentMonth = createCalendarMonth(initialStartWeek, initialEndWeek)
 const initialState = {
   currentMonthIndex: 0,
   month: currentMonth,
-  year: { 0: currentMonth }
+  year: { 0: currentMonth } // keep a track of the months in the year
 }
 
 function calendarReducer (state = initialState, action) {

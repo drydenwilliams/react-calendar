@@ -45,6 +45,8 @@ class CalendarMonth extends React.Component {
 
   renderWeeks (week, index) {
     const { month, actions } = this.props
+
+    // TODO: Clean this up and pop in to a list component
     return month.map((week, index) => (
       <div key={week.uuid} className='week'>
         {week.days.map((weekday, index) => (
